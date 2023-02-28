@@ -5,7 +5,8 @@ using UnityEngine;
 public class RowController : MonoBehaviour
 {
     [SerializeField] private int timer;
-    [SerializeField] private Texture sprite;
+    public Texture[] sprite;
+    public RoadContoller _road;
     public int _angle;
     public float _speed;
     private MeshRenderer _renderer;
@@ -33,6 +34,7 @@ public class RowController : MonoBehaviour
         };
         transform.localRotation = Quaternion.Euler(_angle,-90,90);
         _renderer = GetComponent<MeshRenderer>();
+        _renderer.material.mainTexture = sprite[0];
         StartCoroutine("FadeIn");
     }
 
@@ -45,8 +47,8 @@ public class RowController : MonoBehaviour
     {
         if(other.tag == "RoadPreEnd")
         {
-            transform.GetComponent<MeshRenderer>().material.mainTexture = sprite;
-            RoadContoller.Instance._rows.Add(this);
+            transform.GetComponent<MeshRenderer>().material.mainTexture = sprite[1];
+            _road._rows.Add(this);
           
         }
         
@@ -74,7 +76,7 @@ public class RowController : MonoBehaviour
     }
     IEnumerator FadeOut()
     {
-        RoadContoller.Instance._rows.Remove(this);
+        _road._rows.Remove(this);
         float a = _renderer.material.color.a;
         Material material = _renderer.material;
         material.color = new Color(material.color.r, material.color.g, material.color.b, 1);

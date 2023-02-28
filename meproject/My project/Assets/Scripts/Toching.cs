@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Toching : MonoBehaviour
 {
+    [SerializeField] private RoadContoller _road;
     [SerializeField] private Transform _rightHand;
     [SerializeField] private float _minMagnitude;
     private Vector3 _lastPosition;
@@ -24,25 +25,25 @@ public class Toching : MonoBehaviour
             {
                 if (direction.x < 0)
                 {
-                    RoadContoller.Instance?.OnSwape(RowController.Swape.left);
+                    _road.OnSwape(RowController.Swape.left);
                     print("left");
                 }
                 else
                 {
                     print("right");
-                    RoadContoller.Instance?.OnSwape(RowController.Swape.right);
+                    _road.OnSwape(RowController.Swape.right);
                 }
             }
             else
             {
                 if (direction.y < 0)
                 {
-                    RoadContoller.Instance?.OnSwape(RowController.Swape.down);
+                    _road.OnSwape(RowController.Swape.down);
                     print("down");
                 }
                 else
                 {
-                    RoadContoller.Instance?.OnSwape(RowController.Swape.up);
+                    _road.OnSwape(RowController.Swape.up);
                     print("up");
                 }
             }

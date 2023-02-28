@@ -12,6 +12,8 @@ public class RoadContoller : MonoBehaviour
     public float maxTime;
     private float time;
     [SerializeField] private GameObject _particles;
+    [SerializeField] private Texture[] _sprites;
+
 
     private void Awake() => Instance = this;
 
@@ -20,6 +22,8 @@ public class RoadContoller : MonoBehaviour
         if (time <= 0)
         {
             var row = Instantiate(_row, _spawn.position, Quaternion.identity, transform).GetComponent<RowController>();
+            row._road = this;
+            row.sprite = _sprites;
             time = Random.Range(minTime, maxTime);
         }
         time -= Time.deltaTime;
